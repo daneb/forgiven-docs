@@ -1,20 +1,57 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Forgiven Documentation Site
 
-# Run and deploy your AI Studio app
+This repository contains the documentation website for [Forgiven](https://github.com/daneb/forgiven), an AI-first terminal-based IDE.
 
-This contains everything you need to run your app locally.
+Currently, this site is built with React, Vite, and Tailwind CSS, and dynamically fetches the main project's README to render the documentation.
 
-View your app in AI Studio: https://ai.studio/apps/664c40c7-b909-4dbf-8558-cfb020ea5f0d
+## 🚀 Deployment Instructions (GitHub Pages)
 
-## Run Locally
+To deploy this site automatically to GitHub Pages, you need a GitHub Actions workflow.
 
-**Prerequisites:**  Node.js
+1. In your repository, create a file at exactly this path: `.github/workflows/deploy.yml`
+2. Paste the following configuration:
 
+```yaml
+name: Deploy to GitHub Pages
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+on:
+  push:
+    branches: ['master'] # Or 'main' depending on your default branch
+  workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

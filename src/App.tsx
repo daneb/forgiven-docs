@@ -5,8 +5,9 @@
 
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { Terminal, Cpu, Keyboard, Search, FileCode2, Command, Github, BookOpen, Sparkles, Zap, Box, Activity } from 'lucide-react';
+import { Terminal, Cpu, Keyboard, Search, FileCode2, Command, Github, BookOpen, Sparkles, Zap, Box, Activity, ArrowRight } from 'lucide-react';
 import { cn } from './lib/utils';
+import { DocsPage } from './pages/DocsPage';
 
 function Logo() {
   return (
@@ -30,7 +31,7 @@ function Navbar() {
         </Link>
         <div className="flex items-center gap-6">
           <a href="#features" className="text-sm font-medium text-gray-400 hover:text-gray-100 transition-colors">Features</a>
-          <a href="#docs" className="text-sm font-medium text-gray-400 hover:text-gray-100 transition-colors">Docs</a>
+          <Link to="/docs" className="text-sm font-medium text-gray-400 hover:text-gray-100 transition-colors">Docs</Link>
           <a href="https://github.com/daneb/forgiven" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-gray-100 transition-colors">
             <Github className="h-4 w-4" />
             <span>GitHub</span>
@@ -82,9 +83,9 @@ function Hero() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <a href="#docs" className="inline-flex h-12 items-center justify-center rounded-lg bg-indigo-600 px-8 text-sm font-medium text-white hover:bg-indigo-500 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-950">
-              Get Started
-            </a>
+            <Link to="/docs" className="inline-flex h-12 items-center justify-center rounded-lg bg-indigo-600 px-8 text-sm font-medium text-white hover:bg-indigo-500 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-950">
+              Read the Docs
+            </Link>
             <a href="https://github.com/daneb/forgiven" target="_blank" rel="noreferrer" className="inline-flex h-12 items-center justify-center rounded-lg border border-gray-700 bg-gray-800/50 px-8 text-sm font-medium text-white hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-950">
               <Github className="mr-2 h-4 w-4" />
               View on GitHub
@@ -215,220 +216,17 @@ function Features() {
   );
 }
 
-function Docs() {
+function DocsTeaser() {
   return (
-    <section id="docs" className="py-24 bg-gray-900/30 border-y border-gray-800/50">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          <div className="lg:col-span-4">
-            <div className="sticky top-24">
-              <h2 className="text-2xl font-bold text-white mb-6">Documentation</h2>
-              <nav className="space-y-2">
-                <a href="#quick-start" className="block px-3 py-2 text-sm font-medium text-indigo-400 bg-indigo-500/10 rounded-md">Quick Start</a>
-                <a href="#configuration" className="block px-3 py-2 text-sm font-medium text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-md transition-colors">Configuration</a>
-                <a href="#keybindings" className="block px-3 py-2 text-sm font-medium text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-md transition-colors">Keybindings</a>
-                <a href="#architecture" className="block px-3 py-2 text-sm font-medium text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-md transition-colors">Architecture</a>
-                <a href="#project-structure" className="block px-3 py-2 text-sm font-medium text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-md transition-colors">Project Structure</a>
-              </nav>
-            </div>
-          </div>
-          
-          <div className="lg:col-span-8 prose prose-invert prose-indigo max-w-none">
-            <div id="quick-start" className="mb-16">
-              <h3 className="text-3xl font-bold text-white mb-4">Quick Start</h3>
-              <p className="text-gray-300 mb-4">Get up and running with Forgiven in seconds.</p>
-              <div className="bg-[#0d1117] rounded-lg border border-gray-800 p-4 font-mono text-sm text-gray-300 mb-6">
-                <span className="text-gray-500"># Clone the repository</span><br/>
-                git clone https://github.com/daneb/forgiven.git<br/>
-                cd forgiven<br/><br/>
-                <span className="text-gray-500"># Build and run</span><br/>
-                cargo run --release
-              </div>
-            </div>
-
-            <div id="configuration" className="mb-16">
-              <h3 className="text-3xl font-bold text-white mb-4">Configuration</h3>
-              <p className="text-gray-300 mb-4">Forgiven is highly configurable. You can set up context management and optional runtime dependencies.</p>
-              
-              <h4 className="text-xl font-semibold text-white mb-3 mt-8">Context Management</h4>
-              <p className="text-gray-300 mb-4">Forgiven uses a context management system to provide relevant information to the AI models. You can configure which files and directories are included in the context.</p>
-              
-              <h4 className="text-xl font-semibold text-white mb-3 mt-8">Optional Runtime Dependencies</h4>
-              <ul className="list-disc list-inside text-gray-300 space-y-2 mb-6">
-                <li><strong className="text-indigo-300">Ollama:</strong> Required for local model support.</li>
-                <li><strong className="text-indigo-300">GitHub Copilot CLI:</strong> Required for Copilot integration.</li>
-                <li><strong className="text-indigo-300">Language Servers:</strong> Install the appropriate LSP servers for your languages (e.g., <code className="bg-gray-800 px-1 py-0.5 rounded text-sm">rust-analyzer</code>, <code className="bg-gray-800 px-1 py-0.5 rounded text-sm">tsserver</code>).</li>
-              </ul>
-            </div>
-
-            <div id="keybindings" className="mb-16">
-              <h3 className="text-3xl font-bold text-white mb-4">Keybinding Reference</h3>
-              <p className="text-gray-300 mb-6">Forgiven uses a modal editing system inspired by Vim, with an Emacs/Spacemacs style leader key for global commands.</p>
-              
-              <h4 className="text-xl font-semibold text-white mb-3">Global (Leader Key)</h4>
-              <div className="bg-gray-900/50 rounded-lg border border-gray-800 overflow-hidden mb-8">
-                <table className="w-full text-left text-sm">
-                  <thead className="bg-gray-800/50 text-gray-300">
-                    <tr>
-                      <th className="px-4 py-3 font-medium">Key</th>
-                      <th className="px-4 py-3 font-medium">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-800 text-gray-400">
-                    <tr>
-                      <td className="px-4 py-3 font-mono text-indigo-300">SPC f f</td>
-                      <td className="px-4 py-3">Open file explorer</td>
-                    </tr>
-                    <tr>
-                      <td className="px-4 py-3 font-mono text-indigo-300">SPC s g</td>
-                      <td className="px-4 py-3">Project-wide search</td>
-                    </tr>
-                    <tr>
-                      <td className="px-4 py-3 font-mono text-indigo-300">SPC a</td>
-                      <td className="px-4 py-3">Toggle AI Agent panel</td>
-                    </tr>
-                    <tr>
-                      <td className="px-4 py-3 font-mono text-indigo-300">SPC m p</td>
-                      <td className="px-4 py-3">Markdown preview</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <h4 className="text-xl font-semibold text-white mb-3">Normal Mode</h4>
-              <div className="bg-gray-900/50 rounded-lg border border-gray-800 overflow-hidden">
-                <table className="w-full text-left text-sm">
-                  <thead className="bg-gray-800/50 text-gray-300">
-                    <tr>
-                      <th className="px-4 py-3 font-medium">Key</th>
-                      <th className="px-4 py-3 font-medium">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-800 text-gray-400">
-                    <tr>
-                      <td className="px-4 py-3 font-mono text-indigo-300">h, j, k, l</td>
-                      <td className="px-4 py-3">Move cursor (left, down, up, right)</td>
-                    </tr>
-                    <tr>
-                      <td className="px-4 py-3 font-mono text-indigo-300">i</td>
-                      <td className="px-4 py-3">Enter Insert mode</td>
-                    </tr>
-                    <tr>
-                      <td className="px-4 py-3 font-mono text-indigo-300">v</td>
-                      <td className="px-4 py-3">Enter Visual mode</td>
-                    </tr>
-                    <tr>
-                      <td className="px-4 py-3 font-mono text-indigo-300">/</td>
-                      <td className="px-4 py-3">In-file search</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <h4 className="text-xl font-semibold text-white mb-3 mt-8">Insert Mode</h4>
-              <div className="bg-gray-900/50 rounded-lg border border-gray-800 overflow-hidden">
-                <table className="w-full text-left text-sm">
-                  <thead className="bg-gray-800/50 text-gray-300">
-                    <tr>
-                      <th className="px-4 py-3 font-medium">Key</th>
-                      <th className="px-4 py-3 font-medium">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-800 text-gray-400">
-                    <tr>
-                      <td className="px-4 py-3 font-mono text-indigo-300">Esc / Ctrl+c</td>
-                      <td className="px-4 py-3">Return to Normal mode</td>
-                    </tr>
-                    <tr>
-                      <td className="px-4 py-3 font-mono text-indigo-300">Tab</td>
-                      <td className="px-4 py-3">Accept Copilot suggestion</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <h4 className="text-xl font-semibold text-white mb-3 mt-8">File Explorer (SPC f f)</h4>
-              <div className="bg-gray-900/50 rounded-lg border border-gray-800 overflow-hidden mb-8">
-                <table className="w-full text-left text-sm">
-                  <thead className="bg-gray-800/50 text-gray-300">
-                    <tr>
-                      <th className="px-4 py-3 font-medium">Key</th>
-                      <th className="px-4 py-3 font-medium">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-800 text-gray-400">
-                    <tr>
-                      <td className="px-4 py-3 font-mono text-indigo-300">Enter / l</td>
-                      <td className="px-4 py-3">Open file / Expand directory</td>
-                    </tr>
-                    <tr>
-                      <td className="px-4 py-3 font-mono text-indigo-300">h</td>
-                      <td className="px-4 py-3">Collapse directory / Go to parent</td>
-                    </tr>
-                    <tr>
-                      <td className="px-4 py-3 font-mono text-indigo-300">a / d / r</td>
-                      <td className="px-4 py-3">Add / Delete / Rename file</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div id="architecture" className="mb-16">
-              <h3 className="text-3xl font-bold text-white mb-4">Architecture</h3>
-              <p className="text-gray-300 mb-4">Forgiven is built with Rust for maximum performance and safety. The architecture is designed around a core editor engine with pluggable modules for AI integration, language servers, and UI.</p>
-              
-              <div className="bg-gray-900/50 rounded-lg border border-gray-800 p-6 mt-6">
-                <h4 className="text-lg font-semibold text-white mb-4">Core Components</h4>
-                <ul className="space-y-4 text-gray-300">
-                  <li className="flex items-start gap-3">
-                    <div className="mt-1 h-2 w-2 rounded-full bg-indigo-500 shrink-0"></div>
-                    <div>
-                      <strong className="text-white block">Editor Engine</strong>
-                      Handles buffer management, cursor movement, and modal state (Normal, Insert, Visual).
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="mt-1 h-2 w-2 rounded-full bg-purple-500 shrink-0"></div>
-                    <div>
-                      <strong className="text-white block">AI Subsystem</strong>
-                      Manages communication with Copilot and Ollama, handles prompt generation and response parsing.
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="mt-1 h-2 w-2 rounded-full bg-green-500 shrink-0"></div>
-                    <div>
-                      <strong className="text-white block">LSP Client</strong>
-                      Communicates with language servers for diagnostics, completions, and go-to-definition.
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="mt-1 h-2 w-2 rounded-full bg-yellow-500 shrink-0"></div>
-                    <div>
-                      <strong className="text-white block">Terminal UI</strong>
-                      Renders the interface using Crossterm and Ratatui for a rich, responsive terminal experience.
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div id="project-structure" className="mb-16">
-              <h3 className="text-3xl font-bold text-white mb-4">Project Structure</h3>
-              <p className="text-gray-300 mb-4">Forgiven is organized into several modular crates to maintain separation of concerns:</p>
-              <div className="bg-[#0d1117] rounded-lg border border-gray-800 p-4 font-mono text-sm text-gray-300 mb-6">
-                <div className="text-indigo-400 font-bold mb-2">forgiven/</div>
-                <div className="pl-4 border-l border-gray-800 ml-2 space-y-1">
-                  <div>├── <span className="text-blue-300">core/</span> <span className="text-gray-500"># Editor engine, buffer management, modes</span></div>
-                  <div>├── <span className="text-blue-300">ai/</span> <span className="text-gray-500"># Copilot, Ollama, token tracking, model switching</span></div>
-                  <div>├── <span className="text-blue-300">ui/</span> <span className="text-gray-500"># Terminal rendering (Ratatui), components</span></div>
-                  <div>├── <span className="text-blue-300">lsp/</span> <span className="text-gray-500"># Language Server Protocol client</span></div>
-                  <div>└── <span className="text-blue-300">cli/</span> <span className="text-gray-500"># Command-line interface and entry point</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <section className="py-24 bg-gray-900/30 border-y border-gray-800/50">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+        <h2 className="text-3xl font-bold text-white mb-6">Ready to dive deeper?</h2>
+        <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
+          Explore the full documentation including configuration, architecture, and a comprehensive keybinding reference.
+        </p>
+        <Link to="/docs" className="inline-flex h-12 items-center justify-center rounded-lg bg-indigo-600 px-8 text-sm font-medium text-white hover:bg-indigo-500 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-950">
+          Browse Documentation <ArrowRight className="ml-2 h-4 w-4" />
+        </Link>
       </div>
     </section>
   );
@@ -455,18 +253,27 @@ function Footer() {
   );
 }
 
+function HomePage() {
+  return (
+    <div className="min-h-screen bg-gray-950 text-gray-50 selection:bg-indigo-500/30 font-sans">
+      <Navbar />
+      <main>
+        <Hero />
+        <Features />
+        <DocsTeaser />
+      </main>
+      <Footer />
+    </div>
+  );
+}
+
 export default function App() {
   return (
-    <Router>
-      <div className="min-h-screen bg-gray-950 text-gray-50 selection:bg-indigo-500/30 font-sans">
-        <Navbar />
-        <main>
-          <Hero />
-          <Features />
-          <Docs />
-        </main>
-        <Footer />
-      </div>
+    <Router basename="/forgiven-docs">
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/docs" element={<DocsPage />} />
+      </Routes>
     </Router>
   );
 }

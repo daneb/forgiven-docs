@@ -153,13 +153,13 @@ const features = [
     icon: Cpu,
   },
   {
-    name: 'Copilot Empowered',
-    description: 'Deep integration with GitHub Copilot for intelligent code completions and suggestions as you type.',
+    name: 'Multi-Provider LLMs',
+    description: 'First-class support for Anthropic, OpenAI, Gemini, OpenRouter, and GitHub Copilot. Bring your own keys or use enterprise seats.',
     icon: Sparkles,
   },
   {
-    name: 'Ollama Support',
-    description: 'Run open-source models locally with Ollama. Keep your code private while still leveraging powerful AI assistance.',
+    name: 'Local AI with Ollama',
+    description: 'Run open-source models locally with Ollama. Keep your code 100% private while still leveraging powerful AI assistance.',
     icon: Box,
   },
   {

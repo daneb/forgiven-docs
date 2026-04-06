@@ -34,11 +34,20 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
             );
           },
           a({ node, children, href, ...props }: any) {
-            // Make external links open in new tab
-            const isExternal = href?.startsWith('http');
+            let isExternal = href?.startsWith('http');
+            let finalHref = href;
+            
+            // Rewrite relative links to point to the main GitHub repo
+            if (href && !href.startsWith('http') && !href.startsWith('#')) {
+              // Remove leading slash if present
+              const cleanPath = href.startsWith('/') ? href.slice(1) : href;
+              finalHref = `https://github.com/daneb/forgiven/blob/master/${cleanPath}`;
+              isExternal = true;
+            }
+
             return (
               <a 
-                href={href} 
+                href={finalHref} 
                 target={isExternal ? "_blank" : undefined} 
                 rel={isExternal ? "noopener noreferrer" : undefined}
                 {...props}

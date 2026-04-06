@@ -5,7 +5,7 @@
 
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { Terminal, Cpu, Keyboard, Search, FileCode2, Command, Github, BookOpen, Sparkles, Zap, Box, Activity, ArrowRight } from 'lucide-react';
+import { Terminal, Cpu, Keyboard, Search, FileCode2, Command, Github, BookOpen, Sparkles, Zap, Box, Activity, ArrowRight, Network, Shield, Minimize } from 'lucide-react';
 import { cn } from './lib/utils';
 import { DocsPage } from './pages/DocsPage';
 
@@ -168,9 +168,14 @@ const features = [
     icon: Zap,
   },
   {
-    name: 'Model & Token Management',
-    description: 'Real-time token tracking and seamless switching between different AI models and providers on the fly.',
-    icon: Activity,
+    name: 'Auto-Janitor & Caveman Mode',
+    description: 'Rolling history compression and strict agent brevity constraints prevent context exhaustion and token waste.',
+    icon: Minimize,
+  },
+  {
+    name: 'Model Context Protocol',
+    description: 'Seamlessly connect to external tools, local datasets, and APIs using the open Model Context Protocol (MCP) standard.',
+    icon: Network,
   },
   {
     name: 'Vim Keybindings',
@@ -181,6 +186,11 @@ const features = [
     name: 'Emacs-style Navigation',
     description: 'Spacemacs-style leader key (SPC) system for intuitive, discoverable command execution without complex chords.',
     icon: Command,
+  },
+  {
+    name: 'Zero Telemetry',
+    description: 'Your code is your business. Forgiven tracks nothing, logs nothing, and sends absolutely zero telemetry data.',
+    icon: Shield,
   },
 ];
 
@@ -222,7 +232,7 @@ function DocsTeaser() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-3xl font-bold text-white mb-6">Ready to dive deeper?</h2>
         <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
-          Explore the full documentation including configuration, architecture, and a comprehensive keybinding reference.
+          Explore the full editor reference, including modal editing, tree-sitter text objects, and a comprehensive keybinding guide.
         </p>
         <Link to="/docs" className="inline-flex h-12 items-center justify-center rounded-lg bg-indigo-600 px-8 text-sm font-medium text-white hover:bg-indigo-500 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-950">
           Browse Documentation <ArrowRight className="ml-2 h-4 w-4" />
@@ -269,7 +279,7 @@ function HomePage() {
 
 export default function App() {
   return (
-    <Router basename="/forgiven-docs">
+    <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/docs" element={<DocsPage />} />

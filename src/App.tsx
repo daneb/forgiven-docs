@@ -279,7 +279,7 @@ function HomePage() {
 
 export default function App() {
   return (
-    <Router>
+    <Router basename="/forgiven-docs">
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/docs" element={<DocsPage />} />
